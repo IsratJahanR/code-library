@@ -1,48 +1,47 @@
-/*
-5 4
-1 3
-1 4
-3 5
-5 2
-output:
-1 3 4 5 2
-*/
 #include<bits/stdc++.h>
-#define N 200005
+
+#define ll long long int
+#define pb push_back
+const int         N   = (int) 2e5 + 5;
+
 using namespace std;
-vector<int>g[N];
+
 bool vis[N];
-void bfs(int src)
+vector<int>adj[N];
+void bfs(int u)
 {
-   queue<int>q;
-   q.push(src);
-   vis[src]=true;
-   while(!q.empty())
-   {
-       int f=q.front();
-       q.pop();
-       cout<<f<<" ";
-       for(auto v:g[f])
-       {
-           if(!vis[v])
-           {
-               vis[v]=true;
-               q.push(v);
-           }
-       }
-   }
+    vis[u]=1;
+    queue<int>q;
+    q.push(u);
+    while(!q.empty())
+    {
+      int f = q.front();
+      q.pop();
+
+      cout << f << " ";
+      for(auto x : adj[u]){
+          if(!vis[x]){
+              q.push(x);
+              vis[x]=1;
+          }
+      }
+    }
 }
 int main()
 {
-    int n,e;
+    int n,e,u,v;
     cin>>n>>e;
-    while(e--)
+    for(int i=0;i<e;i++)
     {
-       int u,v;
        cin>>u>>v;
-       g[u].push_back(v);
-       g[v].push_back(u);
+       adj[u].pb(v);
+       adj[v].pb(u);
     }
-    int src=1;
-    bfs(src);
+    for(int i=1;i<=n;i++)
+    {
+        if(!vis[i])bfs(i);
+    }
+
+
+   return 0;
 }

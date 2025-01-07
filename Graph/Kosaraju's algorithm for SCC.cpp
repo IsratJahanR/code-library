@@ -26,6 +26,7 @@ void dfs(int node)
        if(!vis[v])dfs(v);
 
     }
+    //cout<<node<<endl;
     order.push_back(node);
 
 }
@@ -58,8 +59,8 @@ int main()
            if(!vis[i])dfs(i);
        }
        floop(i,n)vis[i]=0;
-       //for(auto v: order)cout<<v<<" ";
-       //cout<<endl;
+       for(auto v: order)cout<<v<<" ";
+       cout<<endl;
        for(int i=n-1;i>=0;i--)
        {
            int v=order[i];

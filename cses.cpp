@@ -15,40 +15,36 @@
 
 using namespace std;
 //vector<string>s;
-ll s[100002][100002];
-ll dp[100002][100002];
+//ll s[100002][100002];
+//ll dp[100002][100002];
 
-ll grid(int i,int j)
+ll dp[1000002];
+ll fun(vector<int>& coins, int amount)
 {
-    if(i<0 || j<0 || s[i][j]==1)return 0;
-    if(i==0 && j==0)return 1;
 
-    if(dp[i][j]!=-1)return dp[i][j];
-    ll l = grid(i,j-1);
-    l=l%mod;
-    ll r = grid(i-1,j);
-    r=r%mod;
+    if(amount==0)return 0;
 
-    return dp[i][j]=(l+r)%mod;
+    if(dp[amount]!=-1)return dp[amount];
 
+    ll ans=INT_MAX;
+
+    for(auto c: coins)
+    {
+        if(amount-c>=0)ans=min(ans,fun(coins,amount-c)+1);
+
+    }
+    return dp[amount]=ans;
 }
-
-
 int main()
 {
-    int n,m,k;
-    cin>>n>>m>>k;
-    for(int i=0;i<k;i++)
-    {
-        int x,y;
-        cin>>x>>y;
-        s[x-1][y-1]=1;
-    }
-
-
-
+    int n,amount;
+    cin>>n>>amount;
+    vector<int>coins(n);
+    for(int i=0;i<n;i++)cin>>coins[i];
     memset(dp,-1,sizeof(dp));
-    ll ans = grid(n-1,m-1);
+    ll ans=fun(coins,amount);
+    ans=(ans==INT_MAX)?-1:ans;
     cout<<ans<<endl;
+
 
 }

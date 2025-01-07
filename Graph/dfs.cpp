@@ -1,41 +1,63 @@
 #include<bits/stdc++.h>
-#define N 200005
 using namespace std;
-vector<int>g[N];
-bool vis[N];
-/*
-input:
-5 4
-1 3
-1 4
-3 5
-5 2
-output:
-1 3 5 2 4
-*/
-void dfs(int node)
+const int N = 1e5;
+bool vis[N]={false};
+vector<int> adj[N];
+int vertex,edge;
+void graph_inp()
 {
-    vis[node]=true;
-    cout<<node<<" ";
-    for(auto child: g[node])
+    cout<<"Number of vertex : ";
+    cin>>vertex;
+
+    cout<<"Number of edge : ";
+    cin>>edge;
+
+    int n1,n2;
+    for(int i=0;i<edge;i++)
     {
-        if(!vis[child])dfs(child);
-    }
-}
-int main()
-{
-    int n,e;
-    cin>>n>>e;
-    while(e--)
-    {
-        int u,v;
-        cin>>u>>v;
-        g[u].push_back(v);
-        g[v].push_back(u);
+       cin>>n1>>n2;
+       adj[n1].push_back(n2);
+       adj[n2].push_back(n1);
 
     }
-    for(int i=1;i<=n;i++)
+}
+void dfs(int node)
+{
+    //vis[node]=true;
+
+    stack<int> stk;
+    stk.push(node);
+
+    while(!stk.empty())
     {
-        if(!vis[i])dfs(i);
+        //cout<<temp<<" ";
+        int last = stk.top();
+        stk.pop();
+        if(!vis[last])
+        {
+            cout<<last<<" ";
+            vis[last] = true;
+
+        //int v;
+        for(int i=adj[last].size()-1;i>=0;i--)
+        {
+            if(!vis[adj[last][i]])stk.push(adj[last][i]);
+        }
+        }
+
     }
+
+    ///PreOrder:
+
+
+}
+
+int main()
+{
+    graph_inp();
+    for(int i=1;i<=vertex;i++)
+    {
+        if(vis[i]==false)dfs(i);
+    }
+    return 0;
 }

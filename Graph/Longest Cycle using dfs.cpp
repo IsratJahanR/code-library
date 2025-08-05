@@ -1,6 +1,35 @@
 ///Finding Longest Cycle from a connected graph:
 
+/*
 
+Case:1
+
+8 9
+0 1
+1 2
+2 3
+3 4
+4 5
+5 1
+0 6
+6 7
+7 0
+
+Case:2
+
+8 10
+0 1
+1 2
+2 3
+3 4
+4 5
+5 1
+0 6
+6 7
+7 0
+2 5
+
+*/
 #include<bits/stdc++.h>
 #define N 100005
 #define ll long long
@@ -16,17 +45,17 @@ int vis[100005]={0};
 int dis[100005]={0};
 vector<int>adj[100005];
 int f=-1;
-void dfs(int node,int cnt=0)
+void dfs(int node,int lvl=0)
     {
-        dis[node]=cnt;
+        dis[node]=lvl;
        vis[node]=true;
        for(auto v:adj[node])
        {
           if(vis[v]==1)
           {
-              f=cnt-dis[v]+1;
+              f=max(f,lvl-dis[v]+1);
           }
-          else if(vis[v]==0)dfs(v,cnt+1);
+          else if(vis[v]==0)dfs(v,lvl+1);
        }
        vis[node]=2;
 

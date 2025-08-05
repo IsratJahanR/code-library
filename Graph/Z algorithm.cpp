@@ -30,8 +30,13 @@ auto z_algo(string s)
 
 int main()
 {
-    #ifndef ONLINE_JUDGE
-
-    #endif // ONLINE_JUDGE
+    int t; cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        for(int i=1;i<=n;i++)cout<<i<<" ";
+        cout<<endl;
+    }
 
 }

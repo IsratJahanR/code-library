@@ -30,7 +30,7 @@ void dfs(int node)
         {
             dfs(v);
         }
-            dp[node]=max(dp[node],dp[v]+1);
+        dp[node]=max(dp[node],dp[v]+1);
 
     }
 
@@ -55,14 +55,16 @@ int main()
 
 
     //memset(dp,-1,sizeof(dp));
-    for(int i=1;i<=n;i++)
+    for(int i=0;i<n;i++)
     {
         if(!vis[i])
         {
            dfs(i);
         }
     }
-    ll ans = *max_element(dp,dp+n+1);
+    ll ans = *max_element(dp,dp+n);
+    for(int i=0;i<n;i++)cout<<dp[i]<<" ";
+    cout<<endl;
     cout<<ans<<endl;
 
 }

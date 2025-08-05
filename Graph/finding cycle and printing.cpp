@@ -57,10 +57,10 @@ int main()
             if(ans.size()>2)
             {
                 f=1;
-                 cout<<ans.size()<<endl;
-            for(auto v:ans)cout<<v<<" ";
-            cout<<endl;
-            break;
+                cout<<ans.size()<<endl;
+                for(auto v:ans)cout<<v<<" ";
+                cout<<endl;
+                break;
             }
 
         }
